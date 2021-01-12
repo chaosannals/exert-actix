@@ -1,0 +1,15 @@
+[package]
+name = "exert-actix-server"
+version = "0.1.0"
+authors = ["chaosannals"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+time = "*"
+chrono = "*"
+rand = "*"
+actix-web = "*"
+actix-rt = "*"
+exert-actix-common = { path = "../common" }
