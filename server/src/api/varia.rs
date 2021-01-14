@@ -6,10 +6,22 @@ use exert_actix_common::ip::*;
 use std::path::Path;
 use std::time::SystemTime;
 use chrono::prelude::*;
+use rand::distributions::Uniform;
+use rand::prelude::*;
+
+fn make_set(length: i32) -> Vec<i32> {
+    let mut r = vec![];
+    let u = Uniform::new(0, 10000000);
+    for _ in 0..length {
+        r.push(u.sample(&mut rand::thread_rng()));
+    }
+    return r;
+}
 
 #[get("/{id}/{name}/index.html")]
 async fn user_index(info: web::Path<(u32, String)>) -> impl Responder {
-    format!("Hello {0}!", info.1)
+    let a: Vec<i32> = make_set(10000);
+    format!("Hello {0}! => {1:?}", info.1, a)
 }
 
 #[get("/fs.html")]
