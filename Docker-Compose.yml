@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Actix 服务器
+  server:
+    image: rust:1.49
+    container_name: exert-actix-server
+    working_dir: /app
+    volumes: 
+      - .:/app
+    entrypoint: cargo run --release
+
+  # Redis
+  redis:
+    image: redis:6.0.9
+    container_name: exert-actix-redis
+    restart: always
+    volumes: 
+      - ./redis/data:/data
+      - ./redis/conf:/etc/redis
+      - ./redis/mod:/mod
+    command: redis-server /etc/redis/redis.conf
+    networks:
+      - exert-actix-net
+
+  # MySQL
+  mysql:
+    image: mysql:8.0.22
+    container_name: exert-actix-mysql
+    restart: always
+    volumes: 
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/file:/var/lib/mysql-files
+      - ./mysql/conf:/etc/mysql:ro
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=exert
+    networks:
+        - exert-actix-net
+    
+networks: 
+  exert-actix-net:
+    name: exert-actix-net
+    driver: bridge

@@ -1,0 +1,3 @@
+[mysqld]
+skip_host_cache
+skip_name_resolve=ON
