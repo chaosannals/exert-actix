@@ -3,11 +3,11 @@ use actix_web::{get, web, Responder};
 use exert_actix_common::fs::*;
 use exert_actix_common::ip::*;
 
-use std::path::Path;
-use std::time::SystemTime;
 use chrono::prelude::*;
 use rand::distributions::Uniform;
 use rand::prelude::*;
+use std::path::Path;
+use std::time::SystemTime;
 
 fn make_set(length: i32) -> Vec<i32> {
     let mut r = vec![];
@@ -38,6 +38,15 @@ async fn ip_index() -> impl Responder {
 
 #[get("/now.html")]
 async fn now_index() -> impl Responder {
+    let today = Local::now().format("%Y-%m-%d").to_string();
+    if let Ok(now) = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
+        return format!("today: {0}, now {1}", today, now.as_nanos());
+    }
+    return format!("today {0} , get time failed.", today);
+}
+
+#[get("/index.html")]
+async fn index() -> impl Responder {
     let today = Local::now().format("%Y-%m-%d").to_string();
     if let Ok(now) = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
         return format!("today: {0}, now {1}", today, now.as_nanos());

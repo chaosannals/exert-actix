@@ -8,6 +8,7 @@ use api::varia::*;
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
+            .service(index)
             .service(user_index)
             .service(ip_index)
             .service(fs_index)
