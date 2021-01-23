@@ -12,4 +12,5 @@ chrono = "*"
 rand = "*"
 actix-web = "*"
 actix-rt = "*"
+sqlx = { version = "0.4.2", features = [ "runtime-actix-rustls", "mysql", "sqlite" ] }
 exert-actix-common = { path = "../common" }

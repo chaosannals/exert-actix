@@ -10,10 +10,13 @@ services:
     depends_on: 
       - redis
       - mysql
+    restart: always
     ports: 
       - "20080:20080"
     volumes: 
       - ./runtime:/app
+    networks:
+        - exert-actix-net
 
   # Redis
   redis:
@@ -25,6 +28,8 @@ services:
       - ./redis/conf:/etc/redis
       - ./redis/mod:/mod
     command: redis-server /etc/redis/redis.conf
+    ports:
+      - "26379:6379"
     networks:
       - exert-actix-net
 
@@ -37,6 +42,8 @@ services:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/file:/var/lib/mysql-files
       - ./mysql/conf:/etc/mysql:ro
+    ports:
+      - "23306:3306"
     environment: 
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=exert
