@@ -1,0 +1,11 @@
+[workspace]
+
+members = [
+    "web1"
+]
+
+
+[workspace.dependencies]
+actix-web = "4"
+env_logger = "0.10"
+log = "0.4"
