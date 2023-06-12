@@ -1,11 +1,18 @@
 [workspace]
 
 members = [
-    "web1"
+    "web1",
+    "wsclient1",
+    "wsserver1"
 ]
 
 
 [workspace.dependencies]
+actix = "0.13"
 actix-web = "4"
+actix-web-actors = "4.1"
+actix-files = "0.6"
+awc = "3"
+
 env_logger = "0.10"
 log = "0.4"
