@@ -61,8 +61,11 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for MyWebSocket {
             Ok(ws::Message::Pong(_)) => {
                 self.last_heartbeat = Instant::now(); // 接收 PONG 改写心跳记录。
             }
+
+            // echo 示例 只是原样响应信息。
             Ok(ws::Message::Text(text)) => ctx.text(text), // 文本数据
             Ok(ws::Message::Binary(bin)) => ctx.binary(bin), // 二进制数据
+            
             Ok(ws::Message::Close(reason)) => {
                 // websocket 关闭事件
                 ctx.close(reason);
