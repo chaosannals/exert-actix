@@ -2,6 +2,8 @@
 
 members = [
     "web1",
+    "wschatcli1",
+    "wschatsrv1",
     "wsclient1",
     "wsserver1"
 ]
@@ -16,3 +18,4 @@ awc = "3"
 
 env_logger = "0.10"
 log = "0.4"
+rand = "0.8"
