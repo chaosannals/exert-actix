@@ -1,0 +1,23 @@
+[package]
+name = "httpproxy1"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = { workspace = true, features = ["rustls"] }
+awc = { version = "3", features = ["rustls"] }
+actix-tls.workspace = true
+
+env_logger.workspace = true
+log.workspace = true
+
+rustls = "0.20.2"
+rustls-pemfile = "1"
+futures-util = { version = "0.3.17", default-features = false, features = ["std"] }
+reqwest = { version = "0.11", features = ["stream"] }
+tokio = { version = "1.24.2", features = ["sync"] }
+tokio-stream = { version = "0.1.3", features = ["sync"] }
+url = "2.2"
+webpki-roots = "0.22"
